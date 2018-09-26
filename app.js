@@ -8,6 +8,7 @@ var http = require('http');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var commonRouter = require('./routes/common');
+var mapsHandler = require('./lib/GoogleMapsHandler'); //temporary import
 
 var app = express();
 
@@ -44,5 +45,8 @@ app.use(function(err, req, res, next) {
 var server = http.createServer(app);
 server.listen(8080);
 console.log('Express server started on port %s', server.address().port);
+
+//Testing Methods
+//End of Testing
 
 module.exports = app;
