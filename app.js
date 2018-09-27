@@ -8,7 +8,7 @@ var http = require('http');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var commonRouter = require('./routes/common');
-var mapsHandler = require('./lib/GoogleMapsHandler'); //temporary import
+var carpoolRouter = require('./routes/carpool');
 
 var app = express();
 
@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/common', commonRouter);
+app.use('/carpool', carpoolRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,8 +46,5 @@ app.use(function(err, req, res, next) {
 var server = http.createServer(app);
 server.listen(8080);
 console.log('Express server started on port %s', server.address().port);
-
-//Testing Methods
-//End of Testing
 
 module.exports = app;

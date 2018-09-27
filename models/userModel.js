@@ -43,5 +43,25 @@ var createUser = function(email, password, firstName, lastName, callback) {
 	return false;
 }
 
+var getUserById = function(user_id, callback) {
+	var statement = "SELECT * FROM common_user WHERE idx =" + user_id + ";";
+	db.runSQLStatement(statement, function(result) {
+		if (result.length == 0) {
+			callback(null);
+		} else {
+			var user = 
+			{
+				id : result[0].idx,
+				email: result[0].email,
+				first_name: result[0].first_name,
+				last_name: result[0].last_name,
+				profile_picture: result[0].profile_picture
+			};
+			callback(user);
+		}
+	});
+}
+
 exports.getUser = getUser;
 exports.createUser = createUser;
+exports.getUserById = getUserById;

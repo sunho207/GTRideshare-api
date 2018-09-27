@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 	if (req.query.email != null && req.query.password != null) {
 		userModel.getUser(req.query.email, req.query.password, function(result) {
 			if (result != null) {
-				res.send({first_name: result.first_name, last_name: result.last_name, profile_picture: result.profile_picture}); //Ok
+				res.send({user_id: result.id, first_name: result.first_name, last_name: result.last_name, profile_picture: result.profile_picture}); //Ok
 			}
 			else {
 				res.sendStatus(401); //Unauthorized
