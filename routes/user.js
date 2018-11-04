@@ -45,6 +45,29 @@ router.post('/', function(req, res, next) {
 	}
 });
 
+/*
+* Update User
+*/
+router.post('/', function(req, res, next) {
+    var user_info;
+    userModel.getUserById(req.body.idx, function(result) {
+        if (result) {
+            user_info = result;
+        } else {
+            res.sendStatus(400);
+        }
+    });
+	Object.keys(user_info).forEach(function(key) {
+	    if (req.hasOwnProperty(key) & req[key] != null) {
+	        user_info[key] = req[key];
+	    }
+	})
+	userModel.updateUser(user_info.idx, user_info.email, user_info.password, user_info.first_name, user_info.last_name, user_info.profile_picture, function(result){
+	    if(result){
+	        res.sendStatus(200);
+	    }
+	});
+});
 // Helpers & Exports \\
 
 var checkRequiredColumns = function(requestBody, requiredColumns) {

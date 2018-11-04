@@ -53,6 +53,7 @@ var getUserById = function(user_id, callback) {
 			{
 				id : result[0].idx,
 				email: result[0].email,
+				password: result[0].password,
 				first_name: result[0].first_name,
 				last_name: result[0].last_name,
 				profile_picture: result[0].profile_picture
@@ -60,6 +61,17 @@ var getUserById = function(user_id, callback) {
 			callback(user);
 		}
 	});
+}
+
+
+var updateUser = function(idx, email, password, firstName, lastName, profilePicture, callback) {
+	var statement = "UPDATE common_user SET email = " + email + ", password =" + password + ", first_name ="+firstName+", last_name ="+lastName+", profile_picture="+profilePicture+" WHERE idx = "idx";";
+	db.runSQLStatement(statement, function(result) {
+		if (result != null && result['affectedRows'] != 0) {
+			callback(true);
+		}
+	});
+	return false;
 }
 
 exports.getUser = getUser;
