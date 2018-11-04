@@ -58,7 +58,7 @@ router.post('/', function(req, res, next) {
         }
     });
 	Object.keys(user_info).forEach(function(key) {
-	    if (req.hasOwnProperty(key) & req[key] != null) {
+	    if (req.body.hasOwnProperty(key) & req.body[key] != null) {
 	        user_info[key] = req[key];
 	    }
 	})
