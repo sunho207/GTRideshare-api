@@ -5,7 +5,7 @@ CREATE TABLE common_user (
   first_name varchar(100) NOT NULL,
   last_name varchar(100) NOT NULL,
   profile_picture varchar(500) NOT NULL,
-  phone_number int(10) NOT NULL,
+  phone_number int(11) NOT NULL,
   PRIMARY KEY (idx),
   UNIQUE KEY email_UNIQUE(email)
 )

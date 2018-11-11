@@ -63,6 +63,7 @@ var getUserById = function(user_id, callback) {
 				email: result[0].email,
 				first_name: result[0].first_name,
 				last_name: result[0].last_name,
+				phone_number: result[0].phone_number,
 				profile_picture: result[0].profile_picture
 			};
 			callback(user);

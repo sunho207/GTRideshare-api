@@ -27,6 +27,7 @@ router.get('/', function(req, res, next) {
 * Post User - Register Endpoint
 */ 
 router.post('/', function(req, res, next) {
+	console.log(req.body)
 	var requiredColumns = ["email","password", "first_name", "last_name", "phone_number", "profile_picture"]; 
 	if (checkRequiredColumns(req.body, requiredColumns)) {
 		var statement = "SELECT COUNT(*) as user_count FROM common_user WHERE email = '" + req.body.email + "'";
@@ -53,7 +54,9 @@ router.put('/', function(req, res, next) {
 	if (checkRequiredColumns(req.body, requiredColumns) && req.body.idx != "") {
 		userModel.updateUser(req.body.idx, req.body.first_name, req.body.last_name, req.body.phone_number, req.body.profile_picture, function(result) {
 			if (result.changedRows != 0) {
-				res.sendStatus(200); //Ok
+				userModel.getUserById(req.body.idx, function(result) {
+					res.send(result); //Ok
+				})
 			}
 			else {
 				res.sendStatus(304); //Not Modified
