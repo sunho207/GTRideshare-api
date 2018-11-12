@@ -11,6 +11,24 @@ var carpoolModel = require('../models/carpoolModel');
 /*
 * GET carpool
 */
+router.get('/user', function(req, res, next) {
+    if (req.query.idx != null) {
+        carpoolModel.getMyCarpools(req.query.idx, function(result) {
+            if (result != null) {
+				res.send(result); //Ok
+			}
+			else {
+				res.sendStatus(500); //Internal Server Error
+			}
+        });
+	} else { //Bad Request
+		res.sendStatus(400);
+	}
+});
+
+/*
+* GET carpool
+*/
 router.get('/', function(req, res, next) {
     if (req.query.lat != null && req.query.lng != null) {
         carpoolModel.getAllCarpools(req.query.lat, req.query.lng, function(result) {
