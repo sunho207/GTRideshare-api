@@ -25,7 +25,9 @@ var getCarpoolers = function(carpool_id, callback) {
 					first_name: result[i].first_name,
 					last_name: result[i].last_name,
 					phone_number: result[i].phone_number,
-					profile_picture: result[i].profile_picture
+					profile_picture: result[i].profile_picture,
+					carpooler_lat: result[i].user_lat,
+					carpooler_lng: result[i].user_lng
                 }
                 users.push(user);
             }
