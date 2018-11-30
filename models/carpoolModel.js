@@ -11,7 +11,7 @@ var userModel = require('../models/userModel');
 var carpoolerModel = require('../models/carpoolerModel');
 
 var createCarpool = function(user_id, lat, lng, arrival, departure, days, start, end, seats, address, callback) {
-    var statement = "INSERT INTO carpools (user_id, lat, lng, carpool_arrival, carpool_departure, carpool_days, start, end, seats )VALUES ('"
+    var statement = "INSERT INTO carpools (user_id, lat, lng, carpool_arrival, carpool_departure, carpool_days, start, end, seats ) VALUES ('"
         + user_id + "', '" + lat + "', '" + lng+ "', '" + arrival + "', '" + departure + "', '" + days + "', '" + start + "', '" + end + "', '" + seats + "');";
 	db.runSQLStatement(statement, function(result) {
 		if (result != null && result['affectedRows'] != 0) {
@@ -85,7 +85,7 @@ var getAllCarpools = function(user_lat, user_lng, callback) {
 }
 
 var getMyStoredCarpools = function(idx, callback) {
-    var statement = `SELECT * FROM carpools JOIN carpoolers ON carpoolers.carpool_id = carpools.idx AND carpoolers.user_id = ${idx};`;
+    var statement = `SELECT carpools.* FROM carpools JOIN carpoolers ON carpoolers.carpool_id = carpools.idx AND pending > 0 AND carpoolers.user_id = ${idx};`;
 	db.runSQLStatement(statement, function(result) {
 		if (result.length == 0) {
 			callback(null);
@@ -139,6 +139,31 @@ var getMyCarpools = function(idx, callback) {
     });
 }
 
+var getPendingUsers = function(idx, callback) {
+    var statement = `SELECT carpools.idx FROM carpools JOIN carpoolers ON carpoolers.carpool_id = carpools.idx AND pending > 0 AND carpoolers.user_id = ${idx};`;
+	db.runSQLStatement(statement, function(result) {
+		if (result.length == 0) {
+			callback([]);
+		} else {
+            var userList = [];
+            var counter = 0;
+
+            _.forEach(result, carpool => {
+                carpoolerModel.getPendingCarpoolers(carpool.idx, (users) => {
+                    _.forEach(users, user => {
+                        userList.push(user)
+                    })
+                    counter++
+                    if (counter == result.length) {
+                        callback(userList);
+                    }
+                })
+            })
+		}
+	});
+}
+
 exports.createCarpool = createCarpool;
 exports.getAllCarpools = getAllCarpools;
 exports.getMyCarpools = getMyCarpools;
+exports.getPendingUsers = getPendingUsers;

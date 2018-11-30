@@ -9,7 +9,25 @@ var _ = require('underscore');
 var carpoolModel = require('../models/carpoolModel');
 
 /*
-* GET carpool
+* GET pending users
+*/
+router.get('/user/pending', function(req, res, next) {
+    if (req.query.idx != null) {
+        carpoolModel.getPendingUsers(req.query.idx, function(result) {
+            if (result != null) {
+				res.send(result); //Ok
+			}
+			else {
+				res.sendStatus(500); //Internal Server Error
+			}
+        });
+	} else { //Bad Request
+		res.sendStatus(400);
+	}
+});
+
+/*
+* GET user carpools
 */
 router.get('/user', function(req, res, next) {
     if (req.query.idx != null) {
@@ -27,7 +45,7 @@ router.get('/user', function(req, res, next) {
 });
 
 /*
-* GET carpool
+* GET all carpools
 */
 router.get('/', function(req, res, next) {
     if (req.query.lat != null && req.query.lng != null) {
