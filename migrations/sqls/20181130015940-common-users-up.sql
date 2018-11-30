@@ -1,4 +1,4 @@
-CREATE TABLE common_user (
+CREATE TABLE common_users (
   idx int(11) NOT NULL AUTO_INCREMENT,
   email varchar(80) NOT NULL,
   password varchar(45) NOT NULL,

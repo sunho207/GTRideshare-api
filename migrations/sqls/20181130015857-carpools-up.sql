@@ -6,5 +6,8 @@ CREATE TABLE carpools (
   carpool_arrival time NOT NULL,
   carpool_departure time NOT NULL,
   carpool_days varchar(10) NOT NULL,
+  start varchar(10) NOT NULL,
+  end varchar(10) NOT NULL,
+  seats int(2) NOT NULL,
   PRIMARY KEY (idx)
 )

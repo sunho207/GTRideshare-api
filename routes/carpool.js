@@ -48,12 +48,13 @@ router.get('/', function(req, res, next) {
 * POST carpool
 */
 router.post('/', function(req, res, next) {
-    var requiredColumns = ["user_id","lat", "lng", "arrival", "departure", "days"]; 
+    var requiredColumns = ["user_id","lat", "lng", "arrival", "departure", "days", "start", "end", "seats", "address"]; 
 	if (checkRequiredColumns(req.body,requiredColumns)) {
-        carpoolModel.createCarpool(req.body.user_id, req.body.lat, req.body.lng, req.body.arrival, req.body.departure, req.body.days, function(result) {
-            if (result) {
-				res.sendStatus(200); //Ok
-			}
+		carpoolModel.createCarpool(req.body.user_id, req.body.lat, req.body.lng,
+			req.body.arrival, req.body.departure, req.body.days, req.body.start, req.body.end, req.body.seats, req.body.address, function(result) {
+				if (result) {
+					res.sendStatus(200); //Ok
+				}
         });
 	} else { //Bad Request
 		res.sendStatus(400);

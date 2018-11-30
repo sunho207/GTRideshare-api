@@ -19,7 +19,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  var filePath = path.join(__dirname, 'sqls', 'carpools.sql');
+  var filePath = path.join(__dirname, 'sqls', '20181130015916-carpoolers-up.sql');
   return new Promise( function( resolve, reject ) {
     fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
       if (err) return reject(err);
@@ -34,7 +34,18 @@ exports.up = function(db) {
 };
 
 exports.down = function(db) {
-  db.dropTable('carpools');
+  var filePath = path.join(__dirname, 'sqls', '20181130015916-carpoolers-down.sql');
+  return new Promise( function( resolve, reject ) {
+    fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
+      if (err) return reject(err);
+      console.log('received data: ' + data);
+
+      resolve(data);
+    });
+  })
+  .then(function(data) {
+    return db.runSql(data);
+  });
 };
 
 exports._meta = {

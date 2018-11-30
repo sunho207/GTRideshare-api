@@ -12,9 +12,9 @@ var carpoolerModel = require('../models/carpoolerModel');
 * POST carpooler
 */
 router.post('/', function(req, res, next) {
-    var requiredColumns = ["user_id","carpool_id","user_lat", "user_lng" ]; 
+    var requiredColumns = ["user_id","carpool_id","user_lat", "user_lng", "user_address" ]; 
 	if (checkRequiredColumns(req.body,requiredColumns)) {
-        carpoolerModel.joinCarpool(req.body.user_id, req.body.carpool_id, req.body.user_lat, req.body.user_lng, function(result) {
+        carpoolerModel.joinCarpool(req.body.user_id, req.body.carpool_id, req.body.user_lat, req.body.user_lng, req.body.user_address, 0, function(result) {
             if (result) {
 				res.sendStatus(200); //Ok
 			}

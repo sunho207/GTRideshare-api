@@ -18,7 +18,7 @@ var userObject =
 };
 
 var getUser = function(email, password, callback) {
-	var statement = "SELECT * FROM common_user WHERE email = '" + email + "' AND password = '" + password + "'";
+	var statement = "SELECT * FROM common_users WHERE email = '" + email + "' AND password = '" + password + "'";
 	db.runSQLStatement(statement, function(result) {
 		if (result.length == 0) {
 			callback(null);
@@ -42,7 +42,7 @@ var createUser = function(email, password, firstName, lastName, phone_number, pr
 	} else {
 		profile_picture_url = "https://www.r-users.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png";
 	}
-	var statement = "INSERT INTO common_user (email, password, first_name, last_name, profile_picture, phone_number) VALUES ( '" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "', '" + profile_picture_url + "', '" + phone_number + "')";
+	var statement = "INSERT INTO common_users (email, password, first_name, last_name, profile_picture, phone_number) VALUES ( '" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "', '" + profile_picture_url + "', '" + phone_number + "')";
 	db.runSQLStatement(statement, function(result) {
 		if (result != null && result['affectedRows'] != 0) {
 			callback(true);
@@ -52,7 +52,7 @@ var createUser = function(email, password, firstName, lastName, phone_number, pr
 }
 
 var getUserById = function(user_id, callback) {
-	var statement = "SELECT * FROM common_user WHERE idx =" + user_id + ";";
+	var statement = "SELECT * FROM common_users WHERE idx =" + user_id + ";";
 	db.runSQLStatement(statement, function(result) {
 		if (result.length == 0) {
 			callback(null);
@@ -90,7 +90,7 @@ var updateUser = function(idx, first_name, last_name, phone_number, profile_pict
 		Ppicture = "'" + profile_picture + "'";
 	}
 
-	var statement = "UPDATE `common_user` SET `first_name` = IFNull(" + Fname + ", first_name),`last_name` = IFNull(" + Lname + ", last_name),`phone_number` = IFNull(" + Pnumber + ", phone_number),`profile_picture` = IFNull(" + Ppicture + ", profile_picture) WHERE `idx` = '" + idx + "';";
+	var statement = "UPDATE `common_users` SET `first_name` = IFNull(" + Fname + ", first_name),`last_name` = IFNull(" + Lname + ", last_name),`phone_number` = IFNull(" + Pnumber + ", phone_number),`profile_picture` = IFNull(" + Ppicture + ", profile_picture) WHERE `idx` = '" + idx + "';";
 	db.runSQLStatement(statement, function(result) {
 		if (result == null) {
 			callback(
