@@ -28,7 +28,7 @@ Currently the GT Rideshare application is at a Pre-Alpha release stage. We have 
 Release 1.0  
 Initial Release   
 Mobile Application with Carpool Share Functionality  
-Functionality Complete:
+Functionality Complete:   
 -Login/Register    
 -Join Rideshare  
 -Schedule Rideshare  
@@ -47,15 +47,15 @@ Admin Dashboard, User Chat, and Email Verification Missing
 -Firebase  
 
 ## Dependent libraries that must be installed:
-Install Nodejs Dependencies  
-Run the following commands to install node dependencies: 
-`npm install`
-`npm run`
+Install Nodejs Dependencies   
+Run the following commands to install node dependencies:   
+`npm install`  
+`npm run`  
 
 ## Download instructions:​
-Install MongoDB on AWS  
-https://docs.mongodb.com/manual/tutorial/install-mongodb-enterprise-on-amazon/ 
-Install MySQL  
-http://www.ntu.edu.sg/home/ehchua/programming/sql/mysql_howto.html 
-Setup Firebase  
-https://firebase.google.com/docs/database/android/start/ 
+Install MongoDB on AWS   
+https://docs.mongodb.com/manual/tutorial/install-mongodb-enterprise-on-amazon/   
+Install MySQL   
+http://www.ntu.edu.sg/home/ehchua/programming/sql/mysql_howto.html   
+Setup Firebase   
+https://firebase.google.com/docs/database/android/start/     
